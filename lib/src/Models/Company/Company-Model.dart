@@ -10,7 +10,7 @@ class CompanyModel {
   String? bs;
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) => CompanyModel(
-    name: json["name"] == null ? null : json["name"],
+    name: json["name"] == null ? null : json["name"].toString().replaceAll("-", " ").replaceAll("#", " ").replaceAll("@", " "),
     catchPhrase: json["catchPhrase"] == null ? null : json["catchPhrase"],
     bs: json["bs"] == null ? null : json["bs"],
   );

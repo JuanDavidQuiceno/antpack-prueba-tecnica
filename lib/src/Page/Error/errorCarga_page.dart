@@ -36,9 +36,10 @@ class _ErrorCargaPageState extends State<ErrorCargaPage> {
                   Center(
                     child: OutlinedButton(
                       onPressed: (){
-                        // FocusScope.of(context).unfocus();
-                        // Navigator.of(context).pushNamedAndRemoveUntil('splash', (Route<dynamic> route) => false);
-                        
+                        // final _bloc = Provider.of(context);
+                        // print(_bloc.dataUser.toJson());
+                        FocusScope.of(context).unfocus();
+                        Navigator.of(context).pushNamedAndRemoveUntil('users', (Route<dynamic> route) => false);
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0))),
@@ -48,7 +49,7 @@ class _ErrorCargaPageState extends State<ErrorCargaPage> {
                       ),       
                       child: Container(
                         // width: MediaQuery.of(context).size.width*0.8,
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5.0),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0.0),
                         child: Text('Continuar', style: TextStyle(color: Colors.black, fontSize: 16.0), textAlign: TextAlign.center,),
                       ),
                     ),

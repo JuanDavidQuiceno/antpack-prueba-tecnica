@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prueba_tecnica/src/Bloc/Provider.dart';
 import 'package:prueba_tecnica/src/Models/UsersList-Model.dart';
-import 'package:prueba_tecnica/src/Preferences/Preferences-User.dart';
+// import 'package:prueba_tecnica/src/Preferences/Preferences-User.dart';
 import 'package:prueba_tecnica/src/Provider/Provider-User.dart';
 import 'package:prueba_tecnica/src/Utils/StyleButton.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -16,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
-  final _prefs = new PreferencesUser();
+  // final _prefs = new PreferencesUser();
   final _providerUser = ProviderUser();
   late Map _data ;
   late Animation<double> animation;
@@ -136,10 +136,9 @@ class SplashScreenState extends State<SplashScreen> with TickerProviderStateMixi
       startTime2();
     } catch (e) {
       rootBundle.loadString('assets/data/user.json').then((value) {
-          _bloc.changeUserSink(UsersListModel.fromJson(json.decode(value)));
-          print(_bloc.dataUser.toJson());
-        }
-      );
+        _bloc.changeUserSink(UsersListModel.fromJson([json.decode(value)]));
+        // print(_bloc.dataUser.toJson());
+      });
       Navigator.of(context).pushNamedAndRemoveUntil('error', (Route<dynamic> route) => false);
     }
   }
@@ -152,7 +151,7 @@ class SplashScreenState extends State<SplashScreen> with TickerProviderStateMixi
           setState(() {/* the state that has changed here is the animation object’s value*/});
         });
         await controller.forward();
-        Navigator.pushReplacementNamed(context, 'error');
+        Navigator.pushReplacementNamed(context, 'users');
       }
     } catch (e) {
       // print('Error de cargar $e');

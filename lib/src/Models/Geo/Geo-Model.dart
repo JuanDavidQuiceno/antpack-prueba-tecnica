@@ -4,12 +4,12 @@ class GeoModel {
     this.lng,
   });
 
-  String? lat;
-  String? lng;
+  double? lat;
+  double? lng;
 
   factory GeoModel.fromJson(Map<String, dynamic> json) => GeoModel(
-    lat: json["lat"] == null ? null : json["lat"],
-    lng: json["lng"] == null ? null : json["lng"],
+    lat: json["lat"] == null ? 4.3580437 : double.tryParse('${json["lat"]}')??4.3580437,
+    lng: json["lng"] == null ? -73.9450831 : double.tryParse('${json["lng"]}')??-73.9450831,
   );
 
   Map<String, dynamic> toJson() => {

@@ -5,6 +5,7 @@ import 'package:prueba_tecnica/src/Bloc/Provider.dart';
 import 'package:prueba_tecnica/src/Preferences/Preferences-User.dart';
 
 import 'src/Page/Error/errorCarga_page.dart';
+import 'src/Page/Home/DetalleUser/DetalleUser-Page.dart';
 import 'src/Page/Home/Users-Page.dart';
 import 'src/Page/SplashScreen/SplashScreen.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'splash' : (BuildContext context) => SplashScreen(),
           'users' : (BuildContext context) => UsersPage(),
+          'user' : (BuildContext context) => DetalleUserPage(),
           'error' : (BuildContext context) => ErrorCargaPage(),
         },
         theme: new ThemeData(
