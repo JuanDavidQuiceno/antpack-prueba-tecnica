@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_tecnica/src/Models/Users-Model.dart';
 
-import 'AddressUser.dart';
-
-
 class EmpresaUser extends StatelessWidget {
   final UserModel user;
   EmpresaUser({Key? key, required this.user}) : super(key: key);

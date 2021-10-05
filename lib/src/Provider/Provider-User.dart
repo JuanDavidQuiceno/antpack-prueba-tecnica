@@ -11,7 +11,7 @@ class ProviderUser{
   Future<Map<String, dynamic>> users(BuildContext context, PatronBloc bloc)async{
     final respuesta = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
     if(respuesta.statusCode == 200){
-      print(respuesta.body);
+      // print(respuesta.body);
       // UserModel user = UserModel.fromJson(json.decode(respuesta.body));
       // List<UserModel> users = List<UserModel>.from(json.decode(respuesta.body).map((x) => UserModel.fromJson(x)));
       UsersListModel users = UsersListModel.fromJson(json.decode(respuesta.body));
