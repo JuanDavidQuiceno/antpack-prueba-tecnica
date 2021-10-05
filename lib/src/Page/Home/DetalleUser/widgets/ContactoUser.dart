@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:prueba_tecnica/src/Models/Users-Model.dart';
+import 'package:prueba_tecnica/src/Widgets/Toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'AddressUser.dart';
 import 'IconContacto.dart';
 
 
-class ContactoUser extends StatelessWidget {
+class ContactoUser extends StatefulWidget {
   final UserModel user;
   ContactoUser({Key? key, required this.user}) : super(key: key);
+
+  @override
+  _ContactoUserState createState() => _ContactoUserState();
+}
+
+class _ContactoUserState extends State<ContactoUser> {
+  FToast fToast = FToast();
+
+  @override
+  void initState() {
+    fToast.init(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +56,11 @@ class ContactoUser extends StatelessWidget {
               children: [
                 Text('Contactame', style: TextStyle(fontSize: 14.0 , fontWeight: FontWeight.bold)),
                 SizedBox(height: 5.0,),
-                AddressUser(icon: Icons.phone_android_rounded, descripcion: user.phone??'Sin telefono',),
+                AddressUser(icon: Icons.phone_android_rounded, descripcion: widget.user.phone??'Sin telefono',),
                 SizedBox(height: 3.0,),
-                AddressUser(icon: Icons.email_rounded, descripcion: user.email??'Sin Email',),
+                AddressUser(icon: Icons.email_rounded, descripcion: widget.user.email??'Sin Email',),
                 SizedBox(height: 3.0,),
-                AddressUser(icon: Icons.web_rounded, descripcion: user.website??'Sin sitio Web',),
+                AddressUser(icon: Icons.web_rounded, descripcion: widget.user.website??'Sin sitio Web',),
                 SizedBox(height: 3.0,),
               ],
             ),
@@ -54,20 +75,29 @@ class ContactoUser extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: (){
-
+                  onTap: ()async{
+                    String telefono =  'tel:${widget.user.phone!.split(" ")[0].replaceAll('-', '')}';
+                    await canLaunch(telefono) 
+                    ? await launch(telefono)
+                    : ToastGenericos.toastIcon(context, fToast, Colors.grey.shade400, Icons.phone_android_rounded, 'Parece que no es un telefono valido', 2);
                   },
                   child: IconContacto(icon: Icons.phone_android_rounded,)
                 ),
                 GestureDetector(
-                  onTap: (){
-
+                  onTap: ()async{
+                    String correo =  'mailto:${widget.user.email}?subject=Obtener más información&body=Saludos\nquiero obtener mas información de los productos y servicios\n quedo atento.';
+                    await canLaunch(correo) 
+                    ? await launch(correo)
+                    : ToastGenericos.toastIcon(context, fToast, Colors.grey.shade400, Icons.email_rounded, 'Parece que no es un correo valido', 2);
                   },
                   child: IconContacto(icon: Icons.email_rounded,)
                 ),
                 GestureDetector(
-                  onTap: (){
-
+                  onTap: ()async{
+                    String telefono =  'https://${widget.user.website}';
+                    await canLaunch(telefono) 
+                    ? await launch(telefono)
+                    : ToastGenericos.toastIcon(context, fToast, Colors.grey.shade400, Icons.phone_android_rounded, 'Parece que no es un telefono valido', 2);
                   },
                   child: IconContacto(icon: Icons.web_rounded,)
                 ),
